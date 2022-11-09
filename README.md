@@ -56,3 +56,24 @@ On a config map the administrator can set some constant values to reference in o
 #### *Secret*
 A secret is similar to a config map but it stores sensible information like passwords. to define variables they need to be stored as base64.
 #### *StatefuSet*
+
+##### *Exmample Diagram of a Deployment in a cluster*
+There is a single ingress access to the applications.<br>
+There are 2 applications, each deployed by their respective deployment config (Deployments represent the application)<br>
+One application is deployed with 3 replicas, and the other with 2 replicas
+Lastly, applications communicate with each other via their service interface
+
+```mermaid
+classDiagram
+    ExternalRequests <--> Ingress 
+    Ingress <--> ServiceApp1
+    ServiceApp1 <--> DeploymentApp1
+    Ingress <--> ServiceApp2
+    ServiceApp2 <--> DeploymentApp2
+    ServiceApp1 <--> ServiceApp2
+    DeploymentApp1 <--> App1Pod1
+    DeploymentApp1 <--> App1Pod2
+    DeploymentApp1 <--> App1Pod3
+    DeploymentApp2 <--> App2Pod1
+    DeploymentApp2 <--> App2Pod2
+```
