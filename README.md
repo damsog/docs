@@ -77,3 +77,31 @@ classDiagram
     DeploymentApp2 <--> App2Pod1
     DeploymentApp2 <--> App2Pod2
 ```
+
+## Commands
+
+#### *Minikube - Test cluster*
+```sh
+minikube start
+```
+
+#### *Kubeadm commands*
+
+#### *Kubectl commands*
+
+| Command      | Description |
+| :---        |    ---:   |
+|```kubectl get pods```| list pods       |
+|```kubectl get pods -a```| list all pods        |
+|```kubectl get pod -o wide```|get pod wideoutput|
+|```kubectl get svc -o wide```|get service wideoutput|
+|```kubectl get node -o wide```|get node wideoutput|
+|```kubectl run pod --image=<img_name>```|run a container on a pod|
+|```kubectl apply -f <yaml_file>```|apply configuration|
+|```kubectl delete pod <pod>```|remove deployment|
+|```kubectl logs <pod>```|check container logs|
+|```kubectl logs <pod> -f```|stream container logs|
+|```kubectl describe deploy <pod>```|get deployment description|
+|```kubectl delete deploy <deployment>```|remove deployment|
+|```kubectl describe deploy <deployment>```|get deployment description|
+|```kubectl describe service <service>```|get deployment description|
