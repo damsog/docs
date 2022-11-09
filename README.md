@@ -65,12 +65,12 @@ Lastly, applications communicate with each other via their service interface
 
 ```mermaid
 classDiagram
-    ExternalRequests <--> Ingress 
+    ExternalRequests <--> "www.domain.com" Ingress 
     Ingress <--> ServiceApp1
     ServiceApp1 <--> DeploymentApp1
     Ingress <--> ServiceApp2
     ServiceApp2 <--> DeploymentApp2
-    ServiceApp1 <--> ServiceApp2
+    ServiceApp1 "ip-service1:port" <--> "ip-service2:port" ServiceApp2
     DeploymentApp1 <--> App1Pod1
     DeploymentApp1 <--> App1Pod2
     DeploymentApp1 <--> App1Pod3
