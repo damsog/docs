@@ -57,10 +57,10 @@ On a config map the administrator can set some constant values to reference in o
 A secret is similar to a config map but it stores sensible information like passwords. to define variables they need to be stored as base64.
 #### *StatefuSet*
 
-##### *Exmample Diagram of a Deployment in a cluster*
+#### *Exmample Diagram of a Deployment in a cluster*
 There is a single ingress access to the applications.<br>
 There are 2 applications, each deployed by their respective deployment config (Deployments represent the application)<br>
-One application is deployed with 3 replicas, and the other with 2 replicas
+One application is deployed with 3 replicas, and the other with 2 replicas<br>
 Lastly, applications communicate with each other via their service interface
 
 ```mermaid
@@ -91,6 +91,10 @@ minikube start
 
 | Command      | Description |
 | :---        |    ---:   |
+|```kubectl get deploy```| list deployments       |
+|```kubectl describe deploy <pod>```|get deployment description|
+|```kubectl delete deploy <deployment>```|remove deployment|
+|```kubectl describe deploy <deployment>```|get deployment description|
 |```kubectl get pods```| list pods       |
 |```kubectl get pods -a```| list all pods        |
 |```kubectl get pod -o wide```|get pod wideoutput|
@@ -101,7 +105,4 @@ minikube start
 |```kubectl delete pod <pod>```|remove deployment|
 |```kubectl logs <pod>```|check container logs|
 |```kubectl logs <pod> -f```|stream container logs|
-|```kubectl describe deploy <pod>```|get deployment description|
-|```kubectl delete deploy <deployment>```|remove deployment|
-|```kubectl describe deploy <deployment>```|get deployment description|
 |```kubectl describe service <service>```|get deployment description|
