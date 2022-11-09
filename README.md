@@ -105,4 +105,5 @@ minikube start
 |```kubectl delete pod <pod>```|remove deployment|
 |```kubectl logs <pod>```|check container logs|
 |```kubectl logs <pod> -f```|stream container logs|
+|```kubectl get services```| list services       |
 |```kubectl describe service <service>```|get deployment description|
