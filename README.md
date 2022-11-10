@@ -81,9 +81,14 @@ classDiagram
 ## Commands
 
 #### *Minikube - Test cluster*
+Start minikube cluster
 ```sh
 minikube start
 ```
+Delete minikube cluster
+```sh
+ minikube delete -p minikube
+ ```
 
 #### *Kubeadm commands*
 
@@ -107,3 +112,10 @@ minikube start
 |```kubectl logs <pod> -f```|stream container logs|
 |```kubectl get services```| list services       |
 |```kubectl describe service <service>```|get deployment description|
+
+## Deployment Configuration
+
+#### *ConfigMap*
+#### *Secret*
+#### *Deployment*
+#### *Service*
