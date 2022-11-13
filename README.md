@@ -119,6 +119,14 @@ For a complete [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsh
 ## Deployment Configuration
 
 #### *Namespace*
+A namespace is a virtual segmentation of a cluster. to separate k8 resources and deployments etc from one another.
+A simple way to create a namespace is to define a namespace.yaml file
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: <namespace-name>
+```
 #### *ConfigMap*
 #### *Secret*
 #### *Deployment*
@@ -126,9 +134,9 @@ For a complete [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsh
 #### *Ingress*
 
 ## Other Resources and Tools
-[Helm package manager](https://helm.sh/)
-[bash auto-completion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)
-[Kubctx and Kubens for context and namespaces](https://github.com/ahmetb/kubectx)
-[prometeus for monitoring](https://prometheus.io/)
+[Helm package manager](https://helm.sh/)<br>
+[bash auto-completion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)<br>
+[Kubctx and Kubens for context and namespaces](https://github.com/ahmetb/kubectx)<br>
+[prometeus for monitoring](https://prometheus.io/)<br>
 
 
