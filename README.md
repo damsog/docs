@@ -43,6 +43,9 @@ Its the component that connects the control plane and all the Worker nodes. Its 
 These components are the machines tasked with doing the work itself. the worker nodes, or simpky nodes, can run one or more pods which are applications themselves.
 #### *Ingress*
 Its an external entry point to the K8 cluster. like an ip address that can be accessed by anyone outside, and its useful to serve an application to the outside world basically.
+An application can have many ingress rules, but to implement them you would need an ingress controller. this is an aditional system that runs on a pod that reads and applies the ingress rules accordingly for each request. there are many third party implementations.<br>
+[Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+[Ingress Controller Bare Metal](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/)
 #### *Deployment (Pods)*
 A deployment is the configuration to run an application. The application (Container) is run within something called a Pod.
 A pod is the smallest component in a K8 cluster. they are tasked with running a single container, and each pod gets its own ip address in the K8 virtual network. <br>
