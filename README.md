@@ -114,6 +114,8 @@ Delete minikube cluster
 |```kubectl get services```| list services       |
 |```kubectl describe service <service>```|get deployment description|
 
+For a complete [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) and advanced options like scale up, rollout etc.
+
 ## Deployment Configuration
 
 #### *Namespace*
