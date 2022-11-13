@@ -123,3 +123,12 @@ For a complete [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsh
 #### *Secret*
 #### *Deployment*
 #### *Service*
+#### *Ingress*
+
+## Other Resources and Tools
+[Helm package manager](https://helm.sh/)
+[bash auto-completion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)
+[Kubctx and Kubens for context and namespaces](https://github.com/ahmetb/kubectx)
+[prometeus for monitoring](https://prometheus.io/)
+
+
