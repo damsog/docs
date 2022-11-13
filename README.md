@@ -96,6 +96,7 @@ Delete minikube cluster
 
 | Command      | Description |
 | :---        |    ---:   |
+|```kubectl get namespaces```| list namespaces       |
 |```kubectl get deploy```| list deployments       |
 |```kubectl describe deploy <pod>```|get deployment description|
 |```kubectl delete deploy <deployment>```|remove deployment|
@@ -104,7 +105,7 @@ Delete minikube cluster
 |```kubectl get pods -a```| list all pods        |
 |```kubectl get pod -o wide```|get pod wideoutput|
 |```kubectl get svc -o wide```|get service wideoutput|
-|```kubectl get node -o wide```|get node wideoutput|
+|```kubectl get node -o wide```|get node wideoutput. Get internal Ip from this one|
 |```kubectl run pod --image=<img_name>```|run a container on a pod|
 |```kubectl apply -f <yaml_file>```|apply configuration|
 |```kubectl delete pod <pod>```|remove deployment|
@@ -115,6 +116,7 @@ Delete minikube cluster
 
 ## Deployment Configuration
 
+#### *Namespace*
 #### *ConfigMap*
 #### *Secret*
 #### *Deployment*
