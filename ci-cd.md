@@ -18,6 +18,7 @@ Usually these runners can be hosted on the pipeline platform or self hosted on a
 
 ## [**Bitbucket Pipelines**](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/)
 
+To describe our pipeline we use a manifest file in yaml format to explain the systen what we want. however, before starting with the manifest file lets prepare the environment and create a runner.
 
 ### *Deployment Environment*
 
@@ -46,6 +47,100 @@ With our command we can now run it, and verify on bitbucket that it's online.<br
 </p>
 
 Now stop it and change the flag -it for -d to run it detached in the background.
+
+### *Pipelines Manifest File*
+
+Now that we have our runner and our deployment environment, lets describe a pipeline.<br>
+Usually you would run tests, then build your application on another step, push it to a docker hub server, the on the deployment step you pull the updated image.<br>
+For simplicity, let's just deploy and application (You can create the number of steps you want, the four mentioned above are just the most common ones)<br>
+NOTE: We will refference a lot of variables with $VAR, these are environment variables, let's ignore that we haven't set these variables yet. we will do it after we set the pipeline manifest. <br>
+For a bitbucket pipeline create a fine named bitbucket-pipelines.yml in the root of the repository of the project and Add the following:
+
+```yaml
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    master:
+```
+
+We start the file with a docker image. This container will run the jobs and each job is completly isolated from each other and they don't save state. <br>
+Below, we start with the pipeline itself, we then describe which branches will serve as trigger, in this case, master.
+
+```yaml
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy
+          runs-on:
+            - 'self.hosted'
+            - 'linux'
+```
+
+Now we describe a step (Like shown in the image above) to deploy the application and name it deploy (you can name it however you want). lets not pay attention to the runs-on: yet.
+
+```yaml
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy
+          runs-on:
+            - 'self.hosted'
+            - 'linux'
+          script:
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER: $SSH_HOST
+                SSH_KEY: $SSH_KEY
+                SERVER_PASS: $SERVER_PASS
+                BITBUCKET_USER: $BITBUCKET_USER
+                BITBUCKET_PASS: $BITBUCKET_PASS
+```
+
+Now we will tell the pipeline what to do, since we are going to run shell commands remotely we need to use another container (provided by bitbucket) to run ssh commands.
+
+```yaml
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy
+          runs-on:
+            - 'self.hosted'
+            - 'linux'
+          script:
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER: $SSH_HOST
+                SSH_KEY: $SSH_KEY
+                SERVER_PASS: $SERVER_PASS
+                BITBUCKET_USER: $BITBUCKET_USER
+                BITBUCKET_PASS: $BITBUCKET_PASS
+                COMMAND: >
+                  cd /home/publicidad/Projects/project_publicity/events && 
+                  git pull https://$BITBUCKET_USER:$BITBUCKET_PASS@bitbucket.org/direcciondesarrollo-admin/events.git/ && 
+                  ./gradlew bootJar &&
+                  cp ./build/libs/crud_events-0.0.1-SNAPSHOT.jar ../deployment/events_service/events.jar &&
+                  echo $SERVER_PASS | sudo -S systemctl restart events.service
+```
+
+Lastly we run shell commands to update the code, compile the application and deploy the app on the server itself.<br>
+
+Save the file and push if you want, this will trigger the pipeline (If pipelines was enabled when creating the runner) However, since the variables are still not set he pipeline should fail, but dont worry about that yet.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46113808/208320357-61fe7d81-1fda-40f9-95ea-0559752a7264.png?raw=true" alt="variables"/>
+</p>
+
+Now lets Define the variables.
 
 ### *Repository Variables*
 
@@ -140,6 +235,14 @@ Copy the output and save it as a pipeline variable (secured) the same as the pre
 <p align="center">
   <img src="https://user-images.githubusercontent.com/46113808/208318797-ff26ec75-b379-4e04-9d9e-8aa528e2aec8.png?raw=true" alt="ssh-key"/>
 </p>
+
+### *Finishing Up*
+
+Now that we defined our variables, let's check that everything it correctly refferenced in the ```bitbucket-piplines.yml``` file. then let's move to the pipelines tab again and click rerun to the failed pipeline, or push any changes to the master branch on bitbucket and it should trigger the pipeline.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46113808/208320617-c7145ea1-7593-4646-9659-e7aff0709f87.png?raw=true" alt="ssh-key"/>
+</p>
+
 
 ## [**GitLab Pipelines**](https://docs.gitlab.com/ee/ci/quick_start/)
 
