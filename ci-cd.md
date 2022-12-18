@@ -49,6 +49,22 @@ Now stop it and change the flag -it for -d to run it detached in the background.
 
 ### *Repository Variables*
 
+The pipeline system allows us to create environment variables that only the runner will see when running the jobs. it's a goob practice to not simply put accesses and names in the pipeline manifest, but to reference them. let's see how.<br>
+Go to Repository Variables in the pipelines section.<br>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46113808/208318416-096ecaa2-9a3f-4bcc-a9a0-9af8009becdc.png?raw=true" alt="variables"/>
+</p>
+
+Here you can add anything you want, like ssh accesses, docker hub acceses, keys, aplication names etc. just be sure to enable secured for keys and passwords.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46113808/208318485-01248068-e3fe-4c1c-81e3-83c36ffbd004.png?raw=true" alt="variables"/>
+</p>
+
+Lets create SSH_USER, SSH_HOST, APPLICATION_NAME, DOCKER_USER, DOCKER_PASSWORD. (Dont make SSH_KEY yet, this one is a little different, we will make it in the next section)<br>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46113808/208318699-ce29f145-a7ec-4317-9143-ae944a22d803.png?raw=true" alt="variables"/>
+</p>
+Now we can refference the value of these variables on our pipeline manifest using $VAR_NAME
 
 ### *SSH Access to the server*
 
@@ -59,7 +75,7 @@ we will use the private key to access to the server matching it to the public ke
   <img src="https://user-images.githubusercontent.com/46113808/208317179-f373d59a-3d39-46c3-a4c8-b5bac6fb40bd.png?raw=true" alt="ssh-key"/>
 </p>
 
-Go to your personal machine (NOT the server). Create a key-pair in your own machine with the following command
+Go to your LOCAL machine (NOT the server). Create a key-pair in your own machine with the following command
 ```sh
 ssh-keygen
 ```
@@ -68,7 +84,7 @@ Give it a name and a location if you want. normally it will be appear on ```~/.s
 
 There should be 2 files. one file without extension (private key) and the other with .pub extension (public key).
 
-Now lets move to the Server. Move or copy the public key to the server.<br>
+Now lets move to the SERVER. Move or copy the public key to the server.<br>
 Now check if the ```~/.ssh``` folder exists:
 
 ```sh
@@ -105,7 +121,7 @@ Add the public key to authorized keys:
 cat <path/to/public/key.pub> >> ~/.ssh/authorized_keys
 ```
 
-Now go back to the local machine and test the connection
+Now go back to the LOCAL machine and test the connection
 
 ```sh
 ssh -i <path/to/private/key> -p <port> <user>@<host>
@@ -114,14 +130,16 @@ ssh -i <path/to/private/key> -p <port> <user>@<host>
 Now we need to add the key to our pipeline environment so the runner can use it.<br>
 The easiest way is to create a new pipeline variable and paste the key there, but for that we need to encode our key on base64 so we can use a long string instead of a file.<br>
 
-Go to your local machine again and enter:
+Go to your LOCAL machine again and enter:
 
 ```sh
 base64 -w 0 < <path/to/private/key>
 ```
 
 Copy the output and save it as a pipeline variable (secured) the same as the previous variables
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46113808/208318797-ff26ec75-b379-4e04-9d9e-8aa528e2aec8.png?raw=true" alt="ssh-key"/>
+</p>
 
 ## [**GitLab Pipelines**](https://docs.gitlab.com/ee/ci/quick_start/)
 
