@@ -112,8 +112,11 @@ Delete minikube cluster
 |```kubectl delete pod <pod>```|remove deployment|
 |```kubectl logs <pod>```|check container logs|
 |```kubectl logs <pod> -f```|stream container logs|
+|```kubectl exec -it <pod> <commands>```|run commands on pod (like a docker container)|
+|```kubectl exec -it <pod> bash```|enter pod container|
 |```kubectl get services```| list services       |
 |```kubectl describe service <service>```|get deployment description|
+|```kubectl get event --field-selector involvedObject.name=<pod>```|get pod events|
 
 For a complete [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) and advanced options like scale up, rollout etc.
 
