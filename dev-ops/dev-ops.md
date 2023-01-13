@@ -13,8 +13,8 @@ This repository contains personal guides for dev ops steps. from development, co
 ## Test
 
 ## Deploy
-- [Kubernetes](https://github.com/damsog/DevOps-guides/blob/main/kubernetes.md)
-- [CI/CD](https://github.com/damsog/DevOps-guides/blob/main/ci-cd.md)
+- [Kubernetes](https://github.com/damsog/docs/blob/main/dev-ops/kubernetes.md)
+- [CI/CD](https://github.com/damsog/docs/blob/main/dev-ops/ci-cd.md)
 
 ## Operate
 
