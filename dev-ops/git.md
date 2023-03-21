@@ -71,7 +71,7 @@ A big advantage of git its that allows to work locally and remotely. the remote 
 |```git push origin <remote_branch>```| create remote branch |
 |```git remote rename <remote_branch> <new_remote_branch>```| rename a branch |
 
-Remote origins.
+### Remote origins.
 
 | Command      | Description |
 | :---        |    ---:   |
@@ -85,207 +85,151 @@ Remote origins.
 |```git clone <remote>```| clone remote |
 |```git clone --single-branch --branch <branch> <remote>```| Clone single branch |
 
-File differences
+### File differences
 
 Since git keeps track of all the changes we made to the files, specially code, it can be used to check the changes made to the modified files. lines added, lines removed, changes between files, between the same file in different commits, etc.
 
 | Command      | Description |
 | :---        |    ---:   |
+|```git diff <file>```| differences from last commit |
+|```git diff <commit1> <commit2> -- <file>```| differences on a file from different commits |
+|```git diff HEAD~N HEAD -- <file>```| differences from current head to N commits back |
+|```git diff <revision_1>:<file_1> <revision_2>:<file_2>```| differences on different files from different commits |
 
-|``````| differences from last commit
-
-git diff <file>
-
-|``````| differences on a file from different commits.
-
-git diff <commit1> <commit2> -- <file>
-
-|``````| differences from current head to N commits back
-
-git diff HEAD~N HEAD -- <file>
-
-|``````| differences on different files from different commits
-
-git diff <revision_1>:<file_1> <revision_2>:<file_2>
-
-Stashing
+### Stashing
 
 Its sometimes useful to save changes temporarily. if we were working on something but we are not sure we should commit it, or maybe we dont want to commit it, but we want to keep these changes around for a bit. this allows to perform git operations without having to commit and without having to discard changes.
 
 | Command      | Description |
 | :---        |    ---:   |
+|```git stash```| save stash |
+|```git stash -p <file>```| save stash specific files |
+|```git stash pop```| get stash changes and remove from stash list |
+|```git stash pop stash@{n}```| get specific stash changes and remove stash from stash list |
+|```git stash apply stash@{n}```| get specific stash changes but keep on stash list |
+|```git stash save "<stash name>"```| save stash and name it |
+|```git stash list```| list stashes |
+|```git stash drop stash@{n}```| remove stash from stash list |
 
-|``````| save stash
+### Joining Changes
 
-git stash
+#### Merge, Rebase and Cherry-Pick
+Merge is a command that allows us to combine the changes of a different branch into the current branch. (the name might cause a confusion. merge is to bring the differences of another branch into the currently checked one). if you want to bring the changes made to branch2 into branch1 you have to checkout branch1 and then use gir merge branch2.<br>
+<br>
+Another important and similar command is Rebase. It's similar to merge in the sense that is used to join branches, however, rebase alters the git history, (TODO)
+#### Push/Pull
+The way push and pull work is similar to merge but between a local and a remote branch. When you use pull you are bringing the changes from a different repository to the local (like merge but remotely). Push on the other hand forces the changes from your local repository into the target repository. Push is the only of these 3 commands that works outwards.<br>
+<br>
+Lastly, pull request means that you are requesting the owner of a different repository to please pull the changes from your repository into their repository. it differs from a push because you are not simply forcing your changes on a remote, you are making a request (and the other party may accept or deny) for a pull command, hence, pull request.
 
-|``````| save stash specific files
+| Command      | Description |
+| :---        |    ---:   |
+|```git merge <branch>```| merge |
+|```git merge squash <branch>```| merge squash (into a single commit) |
+|```git cherry-pick <commit>```| cherrypick, to pick a specific commit |
+|```git rebase <branch>```| Rebase |
+|```git pull <branch> <remote>/<branch>```| pull |
+|```git push <branch> <remote>/<branch>```| push |
 
-git stash -p <file>
+### Commit Navigation
 
-|``````| get stash changes and remove from stash list
+git allows us to navigate between points in time (commits or hashes) using different forms and perform different options, be it just to take a peak at the code at that point without modifying anything or to go back to restore a previous state. <br>
+The way git works there is a tree with nodes which are the commits, and the state of the repository is where the head (basically a pointer) is. so you can navigate old versions moving the head and go back to the last commit etc.<br>
 
-git stash pop
+#### checkout vs reset vs revert
+An important detail is that git uses a pointer, the Head and a main ref to know how to navigate versions. when you use git checkout, the head moves but the main ref is still on the last commit, so you can change versions of your code. but if you want to undo a commit, you have to use reset which moves both, head and main. however, reset undoes the history so its a bit dangerous to use. if you want to go back some commits but keep the reversion itself on the history use revert which creates a new commit that undoes the changes from a previous commit.<br>
 
-|``````| get specific stash changes and remove stash from stash list
-
-git stash pop stash@{n}
-
-|``````| get specific stash changes but keep on stash list
-
-git stash apply stash@{n}
-
-|``````| save stash and name it
-
-git stash save "<stash name>"
-
-|``````| list stashes
-
-git stash list
-
-|``````| remove stash from stash list
-
-git stash drop stash@{n}
-
-Merging and Pull request
-
-info/merging
-Merge is a command that allows us to combine the changes of a different branch into the current branch. (the name might cause a confusion. merge is to bring the differences of another branch into the currently checked one). if you want to bring the changes made to branch2 into branch1 you have to checkout branch1 and then use gir merge branch2
-
-|``````| merge
-
-git merge <branch>
-
-info/push, pull and pull request
-The way push and pull work is similar to merge but between a local and a remote branch. when you use push, you force your changes from your repository into the target repository. when you use pull you are bringing the changes from a different repository to the local (like merge). a pull request is you requesting the owner of a different repository to please pull the changes from your repository into their repository.
-
-Commit Navigation.
-
-info/commit navigation
-git allows us to navigate between points in time (commits or hashes) using different forms and perform different options, be it just to take a peak at the code at that point without modifying anything or to go back to restore a previous state.
-The way git works there is a tree with nodes which are the commits, and the state of the repository is where the head (basically a pointer) is. so you can navigate old versions moving the head and go back to the last commit etc.
-
-info/checkout vs reset vs revert
-An important detail is that git uses a pointer, the Head and a main ref to know how to navigate versions. when you use git checkout, the head moves but the main ref is still on the last commit, so you can change versions of your code. but if you want to undo a commit, you have to use reset which moves both, head and main. however, reset undoes the history so its a bit dangerous to use. if you want to go back some commits but keep the reversion itself on the history use revert which creates a new commit that undoes the changes from a previous commit.
-
-info/checkout
+####  Checkout
 using the command checkout we can navigate on different branches and commits in a secure way. if you go to an older commit using checkout what happens is you detach the head from the main but you cannot make changes.
 
 | Command      | Description |
 | :---        |    ---:   |
+|```git log --decorate```| show commit history |
+|```git checkout <hash>```| check specific commit |
+|```git checkout <branch>```| check latest commit on a branch |
 
-|``````| show commit history
-
-git log --decorate
-
-|``````| check specific commit
-
-git checkout <hash>
-
-|``````| check latest commit on a branch
-
-git checkout <branch>
-
-info/reset
+#### Reset
 This command is a little complex to understand. we have to keep in mind the three trees system that git uses. this command can move these trees depending on the flag used with it.
 soft vs hard vs mixed
-
+```
 soft moves only the commit tree. so the files are still modified, and still staged but no commit has been made, so you can un-stage and unmake the changes with git remove and git checkout filemixed moves the commit tree and the stage tree, so files are still modified but changes are not staged, and can be removed using git checkout filehard moves the three trees, so it goes back to how files were a commit before (or the number of commits reseted)
+```
 
 | Command      | Description |
 | :---        |    ---:   |
+|```git reset --soft HEAD~n```| go back n commits keeping changes on disk and added |
+|```git reset HEAD~n```| go back n commits keeping changes on disk |
+|```git reset --hard HEAD~n```| go back n commits without keeping changes |
 
-|``````| go back n commits keeping changes on disk and added
-
-git reset --soft HEAD~n
-
-|``````| go back n commits keeping changes on disk
-
-git reset HEAD~n
-
-|``````| go back n commits without keeping changes
-
-git reset --hard HEAD~n
-
-info/reflog
 another way to move is using reflog. reflog is the complete history of operations on git, adn can be used to move to a certain point after using a git command etc.
 
 | Command      | Description |
 | :---        |    ---:   |
+|```git reflog```| check head movement history |
+|```git reset --soft HEAD@{1}```| move head to a certain point |
 
-|``````| check head movement history
-
-git reflog
-
-|``````| move head to a certain point
-
-git reset --soft HEAD@{1}
-
-info/revert
-revert is similar to reset as it is used to go back to a previous commit but this command creates |
-| :---        |    ---:   |
-git worktree add <path-dir> <branch>
-
-To remove a worktree (Obviously does a new commit that undoes the changes from a previous commit. This command adds new history to the project (it doesn't modify existing history like reset).
-
-|``````| revert
-
-git revert <commit-hash>
-
-NOTE: git revert works very differently to reset. this command reverts individual commits, so when using git reset HEAD~2 undoes everything from hash HEAD and HEAD~1 until it reaches HEAD~2, git revert HEAD~2 only undoes that specific hash.
-
-If you want to undo multiple commits you have to specify the order to undo them like this: <oldest-to-undo-hash>^..<newest-hash> and git will undo each commit from newest to oldest in order and create a commit for each undo to the history. As an alternative you can add the flag --no-commit for reverting changes but not commenting, stacking multiple reverts and just one commit at the end.
-
-Example Reset vs Revert
-
-If we have 5 commits oldest to newest:
-A -> B -> C -> D -> E (HEAD)
-And we want to go back 3 commits (undo E,D,C and go back to B)
-
-using reset:
-
-git reset --soft/hard/mixed HEAD~3
-
-using revert
-
-git revert C^..EAlternatively using HEADgit revert HEAD~2^..HEAD
-
-Notice that when using reset we are specifying where to move the head HEAD~3 which is B and undoes everything until reaches that point, whereas revert we specify which commits to undo so we say undo HEAD HEAD~1 and HEAD~2
-
-Git Worktrees
-
-worktrees are a way to checkout multiple branches at the same time. its really handy if you want to update for example one base branch and quickly update another branch with merge and not having to commit then checkout etc.
-It's also very useful if you want to run the application for bot branches at the same time, to compare etc, or if you need to work with multiple branches regularly.
-The way it works it creates a new folder where the checkout branch as the branch you used to create the folder. and to checkout said branch just navigate to said folder.
-Example, i have a repo with 3 branches, main, main-company1, main-company2. for 3 versions of the same code. i can work with the three at the same time.
+#### Revert
+revert is similar to reset as it is used to go back to a previous commit but this command creates a new commit that undoes the changes from a previous commit. This command adds new history to the project (it doesn't modify existing history like reset).
 
 | Command      | Description |
 | :---        |    ---:   |
+|```git revert <commit-hash>```| revert |
 
-git worktree add <path-dir> <branch>
+NOTE: git revert works very differently to reset. this command reverts individual commits, so when using git reset HEAD~2 undoes everything from hash HEAD and HEAD~1 until it reaches HEAD~2, git revert HEAD~2 only undoes that specific hash. <br>
+<br>
+If you want to undo multiple commits you have to specify the order to undo them like this: <oldest-to-undo-hash>^..<newest-hash> and git will undo each commit from newest to oldest in order and create a commit for each undo to the history. As an alternative you can add the flag --no-commit for reverting changes but not commenting, stacking multiple reverts and just one commit at the end.<br>
 
-To remove a worktree (Obviously doesn't destroy the branch) if i finished using it
+#### Example Reset vs Revert
 
-git worktree remove <path-dir>
+If we have 5 commits oldest to newest:
+```
+A -> B -> C -> D -> E (HEAD)
+```
+And we want to go back 3 commits (undo E,D,C and go back to B) <br>
+using reset:
+```sh
+git reset --soft/hard/mixed HEAD~3
+```
+using revert
+```sh
+git revert C^..E
+Alternatively using HEAD
+git revert HEAD~2^..HEAD
+```
+Notice that when using reset we are specifying where to move the head HEAD~3 which is B and undoes everything until reaches that point, whereas revert we specify which commits to undo so we say undo HEAD HEAD~1 and HEAD~2
+
+### Worktrees
+
+worktrees are a way to checkout multiple branches at the same time. its really handy if you want to update for example one base branch and quickly update another branch with merge and not having to commit then checkout etc.<br>
+It's also very useful if you want to run the application for bot branches at the same time, to compare etc, or if you need to work with multiple branches regularly.<br>
+The way it works it creates a new folder where the checkout branch as the branch you used to create the folder. and to checkout said branch just navigate to said folder.<br>
+Example, i have a repo with 3 branches, main, main-company1, main-company2. for 3 versions of the same code. i can work with the three at the same time.<br>
+
+| Command      | Description |
+| :---        |    ---:   |
+|```git worktree add <path-dir> <branch>```| Create worktree |
+|```git worktree remove <path-dir>```| To remove a worktree (Obviously doesn't destroy the branch) |
 
 Pull Request
 
 Diagrams
 
 This long-ass command lets you view commit histories against each other
+```sh
 git log --graph --abbrev-commit --decorate --oneline <branch1> <branch2>
+```
 
 For ease, create and alias
+```sh
 alias gt="git log --graph --abbrev-commit --decorate --oneline"
+```
 
 add that line to ~/.bashrc and now we can just use gt
-
+```sh
 gt <branch1> <branch2>
+```
+#### Other Advanced Commands
 
-Other Advanced Commands
-
-Cherry pick a single commit
-git cherry-pick <hash>
-
-Find last commit where two branched diverged
-git merge-base <branch1> <branch2>
+| Command      | Description |
+| :---        |    ---:   |
+|```git merge-base <branch1> <branch2>```| Find last commit where two branched diverged |
