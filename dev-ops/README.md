@@ -5,11 +5,11 @@ This repository contains personal guides for dev ops steps. from development, co
 ## Planning
 - [Planning]()
 ## Coding
-- [Git]()
+- [Git](https://github.com/damsog/docs/blob/main/dev-ops/git.md)
 ## Build
 - [Gradle]()
-- [Make]()
-- [Docker]()
+- [Make](https://github.com/damsog/docs/blob/main/dev-ops/make.md)
+- [Docker](https://github.com/damsog/docs/blob/main/dev-ops/docker.md)
 ## Test
 
 ## Deploy
