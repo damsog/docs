@@ -3,9 +3,9 @@
 This repository contains personal guides for Backend Web Application development.
 
 ## Backend Frameworks Guides
-- [Nodejs]()
-- [SpringBoot]()
-- [FastAPI]()
+- [Nodejs](https://github.com/damsog/docs/blob/main/backend/nodejs[ts].md)
+- [SpringBoot](https://github.com/damsog/docs/blob/main/backend/springboot[java].md)
+- [FastAPI](https://github.com/damsog/docs/blob/main/backend/fastapi[py].md)
 
 ## General Backend Application Design Steps
 
