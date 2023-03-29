@@ -127,6 +127,7 @@ Lastly, pull request means that you are requesting the owner of a different repo
 | :---        |    ---:   |
 |```git merge <branch>```| merge |
 |```git merge squash <branch>```| merge squash (into a single commit) |
+|```git merge --abort```| Undoes the merge (aborts the merge. in case there are conflicts) |
 |```git cherry-pick <commit>```| cherrypick, to pick a specific commit |
 |```git rebase <branch>```| Rebase |
 |```git pull <branch> <remote>/<branch>```| pull |
