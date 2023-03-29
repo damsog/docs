@@ -95,6 +95,7 @@ Since git keeps track of all the changes we made to the files, specially code, i
 |```git diff <commit1> <commit2> -- <file>```| differences on a file from different commits |
 |```git diff HEAD~N HEAD -- <file>```| differences from current head to N commits back |
 |```git diff <revision_1>:<file_1> <revision_2>:<file_2>```| differences on different files from different commits |
+|```git diff <branch1>..<branch2>```| differences on different branches |
 
 ### Stashing
 
