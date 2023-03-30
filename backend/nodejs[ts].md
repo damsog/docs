@@ -1,4 +1,4 @@
-# Backend Guides
+# Express Backend Guide
 
 This repository contains personal guides for Backend Web Application development.
 
@@ -50,12 +50,13 @@ Edit the package.json and add the following scripts
 ```
 <project-name>
 |
++-- .base.env       Template. Set up String constants and credentials
 +-- .env            Set up String constants and credentials
-+-- index.ts       Main App config
++-- index.ts        Main App config
 +-- configurations/ Global app configurations and constants
 +-- controllers/    Endpoints and functions controllers
 +-- services/       Functions implementations (Controller implements)
-+-- prisma/       SQl Definition & ORM config
++-- prisma/         SQl Definition & ORM config
 +-- lib/            Personal Libs and helper functions
 +-- models/         Data Models
 +-- public/         Public Resources and frontend goes here
