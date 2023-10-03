@@ -118,6 +118,7 @@ Delete minikube cluster
 |```kubectl describe service <service>```|get deployment description|
 |```kubectl get event --field-selector involvedObject.name=<pod>```|get pod events|
 |```kubectl get secret <secret> --namespace=<namespace-og> -o yaml \| sed 's/namespace: .*/namespace: <namespace-dst>/' \| kubectl apply -f -```|Copy secret from a namespace to another|
+|```kubectl describe node <node>```|Check node status|
 
 For a complete [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) and advanced options like scale up, rollout etc.
 
