@@ -119,6 +119,11 @@ Delete minikube cluster
 |```kubectl get event --field-selector involvedObject.name=<pod>```|get pod events|
 |```kubectl get secret <secret> --namespace=<namespace-og> -o yaml \| sed 's/namespace: .*/namespace: <namespace-dst>/' \| kubectl apply -f -```|Copy secret from a namespace to another|
 |```kubectl describe node <node>```|Check node status|
+|```kubectl taint nodes <node> <key>=<value>:PreferNoSchedule```|Add taint to node|
+|```kubectl taint nodes <node> <key>=<value>:PreferNoSchedule-```|Remove taint from node|
+|```kubectl label nodes <node> <key>=<value>```|Add label to node|
+|```kubectl label --overwrite nodes <node> <key>-```|Remove label from node|
+
 
 For a complete [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) and advanced options like scale up, rollout etc.
 
